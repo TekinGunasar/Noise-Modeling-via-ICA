@@ -1,0 +1,44 @@
+---------------------------------------------------------------------------
+OSError                                   Traceback (most recent call last)
+Cell In[2], line 4
+      1 eeglab_set_file = 'eeglab_data.set'
+      2 #eeg = loadmat(eeglab_set_file, squeeze_me=True, mat_dtype=False)
+      3 #eeg1 = tables.open_file(eeglab_set_file)['EEG']
+----> 4 mp.EEGLAB(eeglab_set_file)
+
+File ~\set_test\metadata_parser.py:11, in EEGLAB.__init__(self, eeglab_set_file)
+      9 def __init__(self,eeglab_set_file):
+     10     self.eeglab_set_file = eeglab_set_file
+---> 11     self.EEG = h5py.File(self.eeglab_set_file,'r')['EEG']
+     12     #self.EEG = tables.open_file(self.eeglab_set_file)['EEG']
+     13     #self.EEG = loadmat(self.eeglab_set_file, squeeze_me=True, mat_dtype=False) # from MNE
+     15     self.set_all()
+
+File ~\.conda\envs\random\Lib\site-packages\h5py\_hl\files.py:562, in File.__init__(self, name, mode, driver, libver, userblock_size, swmr, rdcc_nslots, rdcc_nbytes, rdcc_w0, track_order, fs_strategy, fs_persist, fs_threshold, fs_page_size, page_buf_size, min_meta_keep, min_raw_keep, locking, alignment_threshold, alignment_interval, meta_block_size, **kwds)
+    553     fapl = make_fapl(driver, libver, rdcc_nslots, rdcc_nbytes, rdcc_w0,
+    554                      locking, page_buf_size, min_meta_keep, min_raw_keep,
+    555                      alignment_threshold=alignment_threshold,
+    556                      alignment_interval=alignment_interval,
+    557                      meta_block_size=meta_block_size,
+    558                      **kwds)
+    559     fcpl = make_fcpl(track_order=track_order, fs_strategy=fs_strategy,
+    560                      fs_persist=fs_persist, fs_threshold=fs_threshold,
+    561                      fs_page_size=fs_page_size)
+--> 562     fid = make_fid(name, mode, userblock_size, fapl, fcpl, swmr=swmr)
+    564 if isinstance(libver, tuple):
+    565     self._libver = libver
+
+File ~\.conda\envs\random\Lib\site-packages\h5py\_hl\files.py:235, in make_fid(name, mode, userblock_size, fapl, fcpl, swmr)
+    233     if swmr and swmr_support:
+    234         flags |= h5f.ACC_SWMR_READ
+--> 235     fid = h5f.open(name, flags, fapl=fapl)
+    236 elif mode == 'r+':
+    237     fid = h5f.open(name, h5f.ACC_RDWR, fapl=fapl)
+
+File h5py\_objects.pyx:54, in h5py._objects.with_phil.wrapper()
+
+File h5py\_objects.pyx:55, in h5py._objects.with_phil.wrapper()
+
+File h5py\h5f.pyx:102, in h5py.h5f.open()
+
+OSError: Unable to synchronously open file (file signature not found)
