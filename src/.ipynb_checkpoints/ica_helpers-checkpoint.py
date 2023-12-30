@@ -51,8 +51,7 @@ def forward_process(data,include,exclude,n_pca_components):
     return data
 
 
-
-
+       
 def inverse_process(data,include,exclude,n_pca_components,ica):
 
     if n_pca_components is None:
@@ -87,7 +86,7 @@ def inverse_process(data,include,exclude,n_pca_components,ica):
     sel_keep = np.concatenate(
         (sel_keep, np.arange(ica.n_components_, _n_pca_comp))
     )
-    proj_mat = mixing[sel_keep,:]
+    proj_mat = mixing[:,15]
     data = np.dot(proj_mat, data)
 
     if ica.noise_cov is None:
